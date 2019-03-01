@@ -48,12 +48,21 @@ public class User implements Serializable {
   @JsonView(Views.Complete.class)
   private Collection<Task> tasks;
 
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+  @JsonView(Views.Complete.class)
+  private Collection<Group> owner_groups;
+
+
   public Long getId() {
     return id;
   }
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public void addGroup(Group group) {
+    owner_groups.add(group);
   }
 
   public String getPassword() {
